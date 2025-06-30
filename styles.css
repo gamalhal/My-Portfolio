@@ -1,0 +1,902 @@
+/* 
+    ========================================
+    ملف CSS الرئيسي - موقع جمال حال الشخصي
+    ========================================
+    
+    هذا الملف يحتوي على:
+    1. متغيرات الألوان للوضعين الداكن والفاتح
+    2. إعدادات أساسية (Reset)
+    3. شاشة التحميل
+    4. شريط التنقل
+    5. القسم الرئيسي
+    6. جميع أقسام الموقع
+    7. التصميم المتجاوب
+    
+    المميزات:
+    - نظام ألوان متغير للوضعين
+    - تصميم متجاوب
+    - تأثيرات حركية
+    - دعم RTL
+*/
+
+/* 
+    ========================================
+    متغيرات CSS للتبديل بين الوضعين
+    ========================================
+    تستخدم لتسهيل تغيير الألوان بين الوضع الداكن والفاتح
+*/
+:root {
+    /* ألوان الوضع الفاتح */
+    --bg-primary: #ffffff;          /* الخلفية الرئيسية */
+    --bg-secondary: #f8f9fa;        /* الخلفية الثانوية */
+    --bg-tertiary: #e9ecef;         /* الخلفية الثالثية */
+    --text-primary: #333333;        /* النص الرئيسي */
+    --text-secondary: #666666;      /* النص الثانوي */
+    --text-muted: #999999;          /* النص المخفف */
+    --border-color: #e9ecef;        /* لون الحدود */
+    --shadow-color: rgba(0, 0, 0, 0.1); /* لون الظلال */
+    --card-bg: #ffffff;             /* خلفية البطاقات */
+    --navbar-bg: rgba(255, 255, 255, 0.95); /* خلفية شريط التنقل */
+    --hero-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%); /* تدرج القسم الرئيسي */
+    --accent-color: #667eea;        /* اللون الأساسي */
+    --accent-secondary: #764ba2;    /* اللون الثانوي */
+}
+
+/* ألوان الوضع الداكن */
+[data-theme="dark"] {
+    --bg-primary: #0a0a0a;          /* خلفية سوداء داكنة */
+    --bg-secondary: #1a1a1a;        /* خلفية رمادية داكنة */
+    --bg-tertiary: #2a2a2a;         /* خلفية رمادية متوسطة */
+    --text-primary: #ffffff;        /* نص أبيض */
+    --text-secondary: #cccccc;      /* نص رمادي فاتح */
+    --text-muted: #888888;          /* نص رمادي متوسط */
+    --border-color: #333333;        /* حدود داكنة */
+    --shadow-color: rgba(0, 0, 0, 0.3); /* ظلال داكنة */
+    --card-bg: #1a1a1a;             /* خلفية بطاقات داكنة */
+    --navbar-bg: rgba(10, 10, 10, 0.95); /* خلفية شريط تنقل داكن */
+    --hero-gradient: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%); /* تدرج داكن */
+    --accent-color: #667eea;        /* اللون الأساسي (ثابت) */
+    --accent-secondary: #764ba2;    /* اللون الثانوي (ثابت) */
+}
+
+/* 
+    ========================================
+    إعدادات أساسية (Reset & Base Styles)
+    ========================================
+    إزالة الهوامش والحدود الافتراضية وتعيين الإعدادات الأساسية
+*/
+* {
+    margin: 0;                      /* إزالة الهوامش */
+    padding: 0;                     /* إزالة الحشو */
+    box-sizing: border-box;         /* حساب الحجم مع الحدود */
+}
+
+html {
+    scroll-behavior: smooth;        /* تمرير سلس بين الأقسام */
+}
+
+body {
+    font-family: 'Cairo', sans-serif; /* خط Cairo العربي */
+    line-height: 1.6;              /* ارتفاع السطر */
+    color: var(--text-primary);    /* لون النص من المتغيرات */
+    background-color: var(--bg-primary); /* لون الخلفية من المتغيرات */
+    direction: rtl;                /* اتجاه النص من اليمين لليسار */
+    transition: background-color 0.3s ease, color 0.3s ease; /* انتقال سلس للألوان */
+}
+
+.container {
+    max-width: 1200px;             /* أقصى عرض للحاوية */
+    margin: 0 auto;                /* توسيط الحاوية */
+    padding: 0 20px;               /* حشو جانبي */
+}
+
+/* 
+    ========================================
+    شاشة التحميل (Loading Screen)
+    ========================================
+    تظهر عند بدء تحميل الموقع
+*/
+#loading-screen {
+    position: fixed;                /* ثابتة في الشاشة */
+    top: 0;                        /* من أعلى */
+    left: 0;                       /* من اليسار */
+    width: 100%;                   /* عرض كامل */
+    height: 100%;                  /* ارتفاع كامل */
+    background: var(--hero-gradient); /* خلفية متدرجة */
+    display: flex;                 /* عرض مرن */
+    flex-direction: column;        /* اتجاه عمودي */
+    justify-content: center;       /* توسيط عمودي */
+    align-items: center;           /* توسيط أفقي */
+    z-index: 9999;                 /* طبقة عالية */
+    transition: opacity 0.5s ease-out; /* انتقال سلس للشفافية */
+}
+
+/* الدائرة الدوارة */
+.loader {
+    width: 50px;                   /* عرض الدائرة */
+    height: 50px;                  /* ارتفاع الدائرة */
+    border: 5px solid #ffffff;     /* حدود بيضاء */
+    border-top: 5px solid transparent; /* الحد العلوي شفاف */
+    border-radius: 50%;            /* شكل دائري */
+    animation: spin 1s linear infinite; /* دوران مستمر */
+    margin-bottom: 20px;           /* مسافة من النص */
+}
+
+/* حركة الدوران */
+@keyframes spin {
+    0% { transform: rotate(0deg); }    /* البداية */
+    100% { transform: rotate(360deg); } /* النهاية */
+}
+
+/* نص التحميل */
+#loading-screen p {
+    color: white;                  /* لون النص أبيض */
+    font-size: 18px;              /* حجم الخط */
+    font-weight: 600;             /* سمك الخط */
+}
+
+/* 
+    ========================================
+    شريط التنقل (Navigation Bar)
+    ========================================
+    ثابت في أعلى الصفحة
+*/
+.navbar {
+    position: fixed;               /* ثابت في الأعلى */
+    top: 0;                       /* من أعلى الصفحة */
+    width: 100%;                  /* عرض كامل */
+    background: var(--navbar-bg); /* خلفية شفافة */
+    -webkit-backdrop-filter: blur(10px); /* تأثير ضبابي لسفاري */
+    backdrop-filter: blur(10px);  /* تأثير ضبابي */
+    z-index: 1000;                /* طبقة عالية */
+    padding: 1rem 0;              /* حشو عمودي */
+    box-shadow: 0 2px 20px var(--shadow-color); /* ظل خفيف */
+    transition: background-color 0.3s ease; /* انتقال سلس */
+}
+
+/* حاوية شريط التنقل */
+.nav-container {
+    max-width: 1200px;            /* أقصى عرض */
+    margin: 0 auto;               /* توسيط */
+    padding: 0 20px;              /* حشو جانبي */
+    display: flex;                /* عرض مرن */
+    justify-content: space-between; /* توزيع العناصر */
+    align-items: center;          /* توسيط عمودي */
+}
+
+/* شعار الموقع */
+.nav-logo h2 {
+    color: var(--accent-color);   /* لون الشعار */
+    font-weight: 700;             /* سمك الخط */
+    font-size: 1.5rem;           /* حجم الخط */
+}
+
+/* قائمة التنقل */
+.nav-menu {
+    display: flex;                /* عرض مرن */
+    list-style: none;            /* إزالة النقاط */
+    gap: 2rem;                   /* مسافة بين العناصر */
+}
+
+/* روابط التنقل */
+.nav-link {
+    text-decoration: none;        /* إزالة التسطير */
+    color: var(--text-primary);  /* لون النص */
+    font-weight: 600;            /* سمك الخط */
+    transition: color 0.3s ease; /* انتقال سلس للون */
+    position: relative;          /* موضع نسبي */
+}
+
+/* تأثيرات الروابط */
+.nav-link:hover,
+.nav-link.active {
+    color: var(--accent-color);  /* لون عند التمرير */
+}
+
+/* خط تحت الرابط */
+.nav-link::after {
+    content: '';                 /* محتوى فارغ */
+    position: absolute;          /* موضع مطلق */
+    bottom: -5px;               /* من الأسفل */
+    left: 0;                    /* من اليسار */
+    width: 0;                   /* عرض صفر */
+    height: 2px;                /* ارتفاع الخط */
+    background: var(--accent-color); /* لون الخط */
+    transition: width 0.3s ease; /* انتقال سلس للعرض */
+}
+
+/* عرض الخط عند التمرير */
+.nav-link:hover::after,
+.nav-link.active::after {
+    width: 100%;                /* عرض كامل */
+}
+
+/* أزرار التحكم */
+.nav-controls {
+    display: flex;               /* عرض مرن */
+    align-items: center;         /* توسيط عمودي */
+    gap: 1rem;                  /* مسافة بين الأزرار */
+}
+
+/* زر تبديل الوضع */
+.theme-toggle {
+    background: var(--bg-tertiary); /* خلفية الزر */
+    border: 2px solid var(--border-color); /* حدود الزر */
+    color: var(--text-primary); /* لون الأيقونة */
+    width: 40px;                /* عرض الزر */
+    height: 40px;               /* ارتفاع الزر */
+    border-radius: 50%;         /* شكل دائري */
+    cursor: pointer;            /* مؤشر يد */
+    display: flex;              /* عرض مرن */
+    align-items: center;        /* توسيط عمودي */
+    justify-content: center;    /* توسيط أفقي */
+    transition: all 0.3s ease;  /* انتقال سلس */
+    font-size: 1.1rem;         /* حجم الأيقونة */
+}
+
+/* تأثيرات زر التبديل */
+.theme-toggle:hover {
+    background: var(--accent-color); /* خلفية عند التمرير */
+    color: white;               /* لون أبيض */
+    transform: scale(1.1);      /* تكبير الزر */
+}
+
+/* قائمة الموبايل */
+.hamburger {
+    display: none;              /* مخفية افتراضياً */
+    flex-direction: column;     /* اتجاه عمودي */
+    cursor: pointer;            /* مؤشر يد */
+}
+
+/* خطوط قائمة الموبايل */
+.bar {
+    width: 25px;                /* عرض الخط */
+    height: 3px;                /* ارتفاع الخط */
+    background: var(--text-primary); /* لون الخط */
+    margin: 3px 0;              /* مسافة عمودية */
+    transition: 0.3s;           /* انتقال سلس */
+}
+
+/* 
+    ========================================
+    القسم الرئيسي (Hero Section)
+    ========================================
+    أول ما يراه الزائر
+*/
+.hero-section {
+    min-height: 100vh;          /* ارتفاع كامل الشاشة */
+    display: flex;              /* عرض مرن */
+    align-items: center;        /* توسيط عمودي */
+    background: var(--hero-gradient); /* خلفية متدرجة */
+    color: white;               /* لون النص أبيض */
+    padding: 100px 0 50px;      /* حشو عمودي */
+}
+
+/* محتوى القسم الرئيسي */
+.hero-content {
+    flex: 1;                    /* يأخذ المساحة المتاحة */
+    max-width: 600px;           /* أقصى عرض */
+}
+
+/* العنوان الرئيسي */
+.hero-title {
+    font-size: 3.5rem;          /* حجم كبير */
+    font-weight: 700;           /* سمك الخط */
+    margin-bottom: 1rem;        /* مسافة من الأسفل */
+    animation: fadeInUp 1s ease; /* حركة ظهور */
+}
+
+/* النص الفرعي */
+.hero-subtitle {
+    font-size: 1.2rem;          /* حجم متوسط */
+    margin-bottom: 2rem;        /* مسافة من الأسفل */
+    opacity: 0.9;               /* شفافية خفيفة */
+    animation: fadeInUp 1s ease 0.2s both; /* حركة ظهور متأخرة */
+}
+
+/* أزرار التنقل */
+.hero-buttons {
+    display: flex;              /* عرض مرن */
+    gap: 1rem;                  /* مسافة بين الأزرار */
+    animation: fadeInUp 1s ease 0.4s both; /* حركة ظهور متأخرة */
+}
+
+/* تصميم الأزرار */
+.btn {
+    padding: 12px 30px;         /* حشو داخلي */
+    border: none;               /* إزالة الحدود */
+    border-radius: 50px;        /* حواف دائرية */
+    text-decoration: none;      /* إزالة التسطير */
+    font-weight: 600;           /* سمك الخط */
+    transition: all 0.3s ease;  /* انتقال سلس */
+    cursor: pointer;            /* مؤشر يد */
+    display: inline-block;      /* عرض مضمن */
+}
+
+/* الزر الأساسي */
+.btn-primary {
+    background: white;          /* خلفية بيضاء */
+    color: var(--accent-color); /* لون النص */
+}
+
+/* تأثيرات الزر الأساسي */
+.btn-primary:hover {
+    transform: translateY(-2px); /* رفع الزر */
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2); /* ظل */
+}
+
+/* الزر الثانوي */
+.btn-secondary {
+    background: transparent;    /* خلفية شفافة */
+    color: white;               /* لون النص أبيض */
+    border: 2px solid white;    /* حدود بيضاء */
+}
+
+/* تأثيرات الزر الثانوي */
+.btn-secondary:hover {
+    background: white;          /* خلفية بيضاء */
+    color: var(--accent-color); /* لون النص */
+}
+
+/* صورة القسم الرئيسي */
+.hero-image {
+    flex: 1;                    /* يأخذ المساحة المتاحة */
+    display: flex;              /* عرض مرن */
+    justify-content: center;    /* توسيط أفقي */
+    align-items: center;        /* توسيط عمودي */
+}
+
+/* الدائرة الشخصية */
+.profile-circle {
+    width: 300px;               /* عرض الدائرة */
+    height: 300px;              /* ارتفاع الدائرة */
+    background: rgba(255, 255, 255, 0.1); /* خلفية شفافة */
+    border-radius: 50%;         /* شكل دائري */
+    display: flex;              /* عرض مرن */
+    align-items: center;        /* توسيط عمودي */
+    justify-content: center;    /* توسيط أفقي */
+    font-size: 5rem;           /* حجم الأيقونة */
+    color: white;               /* لون الأيقونة */
+    animation: float 3s ease-in-out infinite; /* حركة عائمة */
+}
+
+/* حركة العوم */
+@keyframes float {
+    0%, 100% { transform: translateY(0px); }    /* البداية والنهاية */
+    50% { transform: translateY(-20px); }       /* المنتصف */
+}
+
+/* حركة الظهور من الأسفل */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;             /* شفاف */
+        transform: translateY(30px); /* من الأسفل */
+    }
+    to {
+        opacity: 1;             /* واضح */
+        transform: translateY(0); /* في المكان */
+    }
+}
+
+/* 
+    ========================================
+    تصميم الأقسام العامة
+    ========================================
+*/
+section {
+    padding: 80px 0;            /* حشو عمودي */
+    transition: background-color 0.3s ease; /* انتقال سلس */
+}
+
+/* عناوين الأقسام */
+.section-title {
+    text-align: center;         /* توسيط النص */
+    font-size: 2.5rem;          /* حجم كبير */
+    font-weight: 700;           /* سمك الخط */
+    margin-bottom: 3rem;        /* مسافة من الأسفل */
+    color: var(--text-primary); /* لون النص */
+    position: relative;         /* موضع نسبي */
+    transition: color 0.3s ease; /* انتقال سلس */
+}
+
+/* خط تحت العنوان */
+.section-title::after {
+    content: '';                /* محتوى فارغ */
+    position: absolute;         /* موضع مطلق */
+    bottom: -10px;             /* من الأسفل */
+    left: 50%;                 /* من المنتصف */
+    transform: translateX(-50%); /* توسيط أفقي */
+    width: 80px;               /* عرض الخط */
+    height: 4px;               /* ارتفاع الخط */
+    background: var(--accent-color); /* لون الخط */
+    border-radius: 2px;        /* حواف دائرية */
+}
+
+/* 
+    ========================================
+    قسم "من أنا" (About Section)
+    ========================================
+*/
+.about-section {
+    background: var(--bg-secondary); /* خلفية ثانوية */
+}
+
+/* محتوى القسم */
+.about-content {
+    max-width: 800px;           /* أقصى عرض */
+    margin: 0 auto;             /* توسيط */
+    text-align: center;         /* توسيط النص */
+}
+
+/* النص الوصفي */
+.about-text p {
+    font-size: 1.1rem;          /* حجم النص */
+    line-height: 1.8;           /* ارتفاع السطر */
+    margin-bottom: 2rem;        /* مسافة من الأسفل */
+    color: var(--text-secondary); /* لون النص */
+    transition: color 0.3s ease; /* انتقال سلس */
+}
+
+/* عنوان المهارات */
+.skills h3 {
+    font-size: 1.5rem;          /* حجم العنوان */
+    margin-bottom: 1rem;        /* مسافة من الأسفل */
+    color: var(--text-primary); /* لون النص */
+    transition: color 0.3s ease; /* انتقال سلس */
+}
+
+/* حاوية المهارات */
+.skill-tags {
+    display: flex;              /* عرض مرن */
+    flex-wrap: wrap;            /* التفاف */
+    justify-content: center;    /* توسيط أفقي */
+    gap: 1rem;                  /* مسافة بين المهارات */
+}
+
+/* بطاقات المهارات */
+.skill-tag {
+    background: var(--accent-color); /* خلفية المهارة */
+    color: white;               /* لون النص */
+    padding: 8px 20px;          /* حشو داخلي */
+    border-radius: 25px;        /* حواف دائرية */
+    font-weight: 600;           /* سمك الخط */
+    font-size: 0.9rem;         /* حجم الخط */
+}
+
+/* 
+    ========================================
+    قسم المشاريع (Projects Section)
+    ========================================
+*/
+.projects-section {
+    background: var(--bg-primary); /* خلفية رئيسية */
+}
+
+/* أزرار التصفية */
+.filter-buttons {
+    display: flex;              /* عرض مرن */
+    justify-content: center;    /* توسيط أفقي */
+    gap: 1rem;                  /* مسافة بين الأزرار */
+    margin-bottom: 3rem;        /* مسافة من الأسفل */
+}
+
+/* تصميم أزرار التصفية */
+.filter-btn {
+    padding: 10px 25px;         /* حشو داخلي */
+    border: 2px solid var(--accent-color); /* حدود */
+    background: transparent;    /* خلفية شفافة */
+    color: var(--accent-color); /* لون النص */
+    border-radius: 25px;        /* حواف دائرية */
+    cursor: pointer;            /* مؤشر يد */
+    font-weight: 600;           /* سمك الخط */
+    transition: all 0.3s ease;  /* انتقال سلس */
+}
+
+/* تأثيرات أزرار التصفية */
+.filter-btn.active,
+.filter-btn:hover {
+    background: var(--accent-color); /* خلفية عند التفعيل */
+    color: white;               /* لون النص أبيض */
+}
+
+/* شبكة المشاريع */
+.projects-grid {
+    display: grid;              /* عرض شبكي */
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* أعمدة متجاوبة */
+    gap: 2rem;                  /* مسافة بين البطاقات */
+}
+
+/* بطاقات المشاريع */
+.project-card {
+    background: var(--card-bg); /* خلفية البطاقة */
+    border-radius: 15px;        /* حواف دائرية */
+    overflow: hidden;           /* إخفاء المحتوى الزائد */
+    box-shadow: 0 10px 30px var(--shadow-color); /* ظل */
+    transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease; /* انتقالات سلسة */
+    border: 1px solid var(--border-color); /* حدود */
+}
+
+/* تأثيرات بطاقات المشاريع */
+.project-card:hover {
+    transform: translateY(-10px); /* رفع البطاقة */
+    box-shadow: 0 20px 40px var(--shadow-color); /* ظل أكبر */
+}
+
+/* صورة المشروع */
+.project-image {
+    height: 200px;              /* ارتفاع الصورة */
+    background: var(--accent-color); /* خلفية الصورة */
+    display: flex;              /* عرض مرن */
+    align-items: center;        /* توسيط عمودي */
+    justify-content: center;    /* توسيط أفقي */
+    font-size: 3rem;           /* حجم الأيقونة */
+    color: white;               /* لون الأيقونة */
+}
+
+/* معلومات المشروع */
+.project-info {
+    padding: 1.5rem;            /* حشو داخلي */
+}
+
+/* عنوان المشروع */
+.project-info h3 {
+    font-size: 1.3rem;          /* حجم العنوان */
+    margin-bottom: 0.5rem;      /* مسافة من الأسفل */
+    color: var(--text-primary); /* لون النص */
+    transition: color 0.3s ease; /* انتقال سلس */
+}
+
+/* وصف المشروع */
+.project-info p {
+    color: var(--text-secondary); /* لون النص */
+    margin-bottom: 1rem;        /* مسافة من الأسفل */
+    transition: color 0.3s ease; /* انتقال سلس */
+}
+
+/* روابط المشروع */
+.project-links {
+    display: flex;              /* عرض مرن */
+    gap: 1rem;                  /* مسافة بين الروابط */
+}
+
+/* تصميم الروابط */
+.project-link {
+    width: 40px;                /* عرض الرابط */
+    height: 40px;               /* ارتفاع الرابط */
+    background: var(--bg-tertiary); /* خلفية الرابط */
+    border-radius: 50%;         /* شكل دائري */
+    display: flex;              /* عرض مرن */
+    align-items: center;        /* توسيط عمودي */
+    justify-content: center;    /* توسيط أفقي */
+    color: var(--accent-color); /* لون الأيقونة */
+    text-decoration: none;      /* إزالة التسطير */
+    transition: all 0.3s ease;  /* انتقال سلس */
+}
+
+/* تأثيرات الروابط */
+.project-link:hover {
+    background: var(--accent-color); /* خلفية عند التمرير */
+    color: white;               /* لون أبيض */
+    transform: scale(1.1);      /* تكبير الرابط */
+}
+
+/* 
+    ========================================
+    قسم التواصل (Contact Section)
+    ========================================
+*/
+.contact-section {
+    background: var(--bg-secondary); /* خلفية ثانوية */
+}
+
+/* محتوى القسم */
+.contact-content {
+    display: grid;              /* عرض شبكي */
+    grid-template-columns: 1fr 1fr; /* عمودين متساويين */
+    gap: 3rem;                  /* مسافة بين العمودين */
+    max-width: 1000px;          /* أقصى عرض */
+    margin: 0 auto;             /* توسيط */
+}
+
+/* معلومات التواصل */
+.contact-info {
+    display: flex;              /* عرض مرن */
+    flex-direction: column;     /* اتجاه عمودي */
+    gap: 2rem;                  /* مسافة بين العناصر */
+}
+
+/* عناصر التواصل */
+.contact-item {
+    display: flex;              /* عرض مرن */
+    align-items: center;        /* توسيط عمودي */
+    gap: 1rem;                  /* مسافة بين الأيقونة والنص */
+    padding: 1rem;              /* حشو داخلي */
+    background: var(--bg-tertiary); /* خلفية العنصر */
+    border-radius: 10px;        /* حواف دائرية */
+    transition: background-color 0.3s ease; /* انتقال سلس */
+}
+
+/* أيقونات التواصل */
+.contact-item i {
+    font-size: 1.5rem;          /* حجم الأيقونة */
+    color: var(--accent-color); /* لون الأيقونة */
+    width: 30px;                /* عرض ثابت */
+}
+
+/* نص التواصل */
+.contact-item p {
+    color: var(--text-primary); /* لون النص */
+    transition: color 0.3s ease; /* انتقال سلس */
+}
+
+/* نموذج التواصل */
+.contact-form {
+    display: flex;              /* عرض مرن */
+    flex-direction: column;     /* اتجاه عمودي */
+    gap: 1rem;                  /* مسافة بين الحقول */
+}
+
+/* حقول الإدخال */
+.contact-form input,
+.contact-form textarea {
+    padding: 15px;              /* حشو داخلي */
+    border: 2px solid var(--border-color); /* حدود */
+    border-radius: 10px;        /* حواف دائرية */
+    font-family: inherit;       /* خط موروث */
+    font-size: 1rem;           /* حجم الخط */
+    background: var(--card-bg); /* خلفية الحقل */
+    color: var(--text-primary); /* لون النص */
+    transition: border-color 0.3s ease, background-color 0.3s ease, color 0.3s ease; /* انتقالات سلسة */
+}
+
+/* تأثيرات التركيز */
+.contact-form input:focus,
+.contact-form textarea:focus {
+    outline: none;              /* إزالة الإطار */
+    border-color: var(--accent-color); /* لون الحدود عند التركيز */
+}
+
+/* نص placeholder */
+.contact-form input::placeholder,
+.contact-form textarea::placeholder {
+    color: var(--text-muted);   /* لون النص المخفف */
+}
+
+/* زر الإرسال */
+.contact-form button {
+    margin-top: 1rem;           /* مسافة من الأعلى */
+}
+
+/* 
+    ========================================
+    التذييل (Footer)
+    ========================================
+*/
+.footer {
+    background: var(--bg-tertiary); /* خلفية التذييل */
+    color: var(--text-primary); /* لون النص */
+    padding: 2rem 0;            /* حشو عمودي */
+    text-align: center;         /* توسيط النص */
+    transition: background-color 0.3s ease, color 0.3s ease; /* انتقالات سلسة */
+}
+
+/* حاوية التذييل */
+.footer .container {
+    display: flex;              /* عرض مرن */
+    justify-content: space-between; /* توزيع العناصر */
+    align-items: center;        /* توسيط عمودي */
+}
+
+/* روابط التواصل الاجتماعي */
+.social-links {
+    display: flex;              /* عرض مرن */
+    gap: 1rem;                  /* مسافة بين الروابط */
+}
+
+/* تصميم الروابط الاجتماعية */
+.social-links a {
+    width: 40px;                /* عرض الرابط */
+    height: 40px;               /* ارتفاع الرابط */
+    background: var(--accent-color); /* خلفية الرابط */
+    border-radius: 50%;         /* شكل دائري */
+    display: flex;              /* عرض مرن */
+    align-items: center;        /* توسيط عمودي */
+    justify-content: center;    /* توسيط أفقي */
+    color: white;               /* لون الأيقونة */
+    text-decoration: none;      /* إزالة التسطير */
+    transition: all 0.3s ease;  /* انتقال سلس */
+}
+
+/* تأثيرات الروابط الاجتماعية */
+.social-links a:hover {
+    background: var(--accent-secondary); /* خلفية عند التمرير */
+    transform: scale(1.1);      /* تكبير الرابط */
+}
+
+/* 
+    ========================================
+    التصميم المتجاوب (Responsive Design)
+    ========================================
+    تعديلات للشاشات الصغيرة والمتوسطة
+*/
+
+/* الشاشات المتوسطة (أقل من 768px) */
+@media (max-width: 768px) {
+    /* إظهار قائمة الموبايل */
+    .hamburger {
+        display: flex;          /* إظهار القائمة */
+    }
+
+    /* قائمة التنقل للموبايل */
+    .nav-menu {
+        position: fixed;        /* موضع ثابت */
+        left: -100%;           /* خارج الشاشة */
+        top: 70px;             /* من أعلى */
+        flex-direction: column; /* اتجاه عمودي */
+        background-color: var(--card-bg); /* خلفية القائمة */
+        width: 100%;           /* عرض كامل */
+        text-align: center;    /* توسيط النص */
+        transition: 0.3s;      /* انتقال سلس */
+        box-shadow: 0 10px 27px var(--shadow-color); /* ظل */
+        padding: 2rem 0;       /* حشو عمودي */
+    }
+
+    /* إظهار القائمة عند التفعيل */
+    .nav-menu.active {
+        left: 0;               /* في الشاشة */
+    }
+
+    /* تعديل القسم الرئيسي للموبايل */
+    .hero-section {
+        flex-direction: column; /* اتجاه عمودي */
+        text-align: center;    /* توسيط النص */
+        padding: 120px 0 50px; /* حشو معدل */
+    }
+
+    /* تصغير العنوان */
+    .hero-title {
+        font-size: 2.5rem;     /* حجم أصغر */
+    }
+
+    /* تعديل الأزرار */
+    .hero-buttons {
+        flex-direction: column; /* اتجاه عمودي */
+        align-items: center;   /* توسيط أفقي */
+    }
+
+    /* تصغير الدائرة الشخصية */
+    .profile-circle {
+        width: 200px;          /* عرض أصغر */
+        height: 200px;         /* ارتفاع أصغر */
+        font-size: 3rem;      /* حجم أيقونة أصغر */
+        margin-top: 2rem;      /* مسافة من الأعلى */
+    }
+
+    /* تعديل قسم التواصل */
+    .contact-content {
+        grid-template-columns: 1fr; /* عمود واحد */
+    }
+
+    /* تعديل التذييل */
+    .footer .container {
+        flex-direction: column; /* اتجاه عمودي */
+        gap: 1rem;             /* مسافة بين العناصر */
+    }
+
+    /* تعديل أزرار التصفية */
+    .filter-buttons {
+        flex-wrap: wrap;       /* التفاف */
+    }
+
+    /* تعديل شبكة المشاريع */
+    .projects-grid {
+        grid-template-columns: 1fr; /* عمود واحد */
+    }
+}
+
+/* الشاشات الصغيرة جداً (أقل من 480px) */
+@media (max-width: 480px) {
+    /* تصغير العنوان أكثر */
+    .hero-title {
+        font-size: 2rem;       /* حجم أصغر */
+    }
+
+    /* تصغير عناوين الأقسام */
+    .section-title {
+        font-size: 2rem;       /* حجم أصغر */
+    }
+
+    /* تقليل الحشو الجانبي */
+    .container {
+        padding: 0 15px;       /* حشو أقل */
+    }
+}
+
+/* زر الدعم العائم عبر واتساب */
+.whatsapp-support-btn {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 60px;
+    height: 60px;
+    background: #25d366;
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+    font-size: 2.2rem;
+    z-index: 1200;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.2s;
+}
+.whatsapp-support-btn:hover {
+    background: #128c7e;
+    transform: scale(1.08);
+}
+@media (max-width: 600px) {
+    .whatsapp-support-btn {
+        width: 48px;
+        height: 48px;
+        font-size: 1.5rem;
+        bottom: 18px;
+        right: 18px;
+    }
+}
+
+/* زر العودة للأعلى */
+.scroll-to-top {
+    position: fixed;
+    bottom: 30px;
+    right: 100px; /* إزاحة لليسار حتى لا يلتصق بزر واتساب */
+    width: 50px;
+    height: 50px;
+    background: var(--accent-color);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+    z-index: 1100;
+    font-size: 1.2rem;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+}
+.scroll-to-top.show {
+    opacity: 1;
+    visibility: visible;
+}
+@media (max-width: 600px) {
+    .scroll-to-top {
+        right: 70px;
+        width: 40px;
+        height: 40px;
+        font-size: 1rem;
+        bottom: 18px;
+    }
+}
+
+/* زر تبديل اللغة */
+.lang-toggle {
+    background: var(--bg-tertiary);
+    color: var(--accent-color);
+    border: 2px solid var(--accent-color);
+    border-radius: 25px;
+    padding: 8px 22px;
+    font-weight: 700;
+    font-size: 1rem;
+    margin-right: 0.5rem;
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s, border 0.2s, transform 0.2s;
+    outline: none;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    letter-spacing: 1px;
+}
+.lang-toggle:hover, .lang-toggle:focus {
+    background: var(--accent-color);
+    color: #fff;
+    border-color: var(--accent-color);
+    transform: translateY(-2px) scale(1.04);
+} 

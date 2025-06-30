@@ -1,0 +1,769 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" data-theme="dark">
+  <!-- 
+    ========================================
+    ملف HTML الرئيسي - موقع جمال حال الشخصي
+    ========================================
+    
+    هذا الملف يحتوي على:
+    1. شاشة التحميل
+    2. شريط التنقل
+    3. القسم الرئيسي (Hero Section)
+    4. قسم "من أنا"
+    5. قسم المشاريع
+    6. قسم التواصل
+    7. التذييل (Footer)
+    
+    المميزات:
+    - دعم اللغة العربية والاتجاه RTL
+    - الوضع الداكن افتراضياً
+    - تصميم متجاوب
+    - تأثيرات حركية
+-->
+
+  <head>
+    <!-- إعدادات الصفحة الأساسية -->
+    <meta charset="UTF-8" />
+    <!-- ضبط العرض للموبايل -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- عنوان الصفحة -->
+    <title>Gamal Hal - مطور ويب</title>
+
+    <!-- ربط ملفات CSS والخطوط -->
+    <link rel="stylesheet" href="styles.css" />
+    <!-- Font Awesome للأيقونات -->
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+      rel="stylesheet"
+    />
+    <!-- خط Cairo العربي -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+
+  <body>
+    <!-- 
+        ========================================
+        شاشة التحميل (Loading Screen)
+        ========================================
+        تظهر عند بدء تحميل الموقع وتختفي تلقائياً
+        تحتوي على:
+        - دائرة دوارة (spinner)
+        - نص "جاري التحميل..."
+    -->
+    <div id="loading-screen">
+      <div class="loader"></div>
+      <p>جاري التحميل...</p>
+    </div>
+
+    <!-- 
+        ========================================
+        شريط التنقل (Navigation Bar)
+        ========================================
+        ثابت في أعلى الصفحة ويحتوي على:
+        - شعار الموقع
+        - قائمة التنقل
+        - زر تبديل الوضع الداكن/الفاتح
+        - زر اختيار اللغة
+        - قائمة الموبايل (hamburger menu)
+    -->
+    <nav class="navbar">
+      <div class="nav-container">
+        <!-- شعار الموقع -->
+        <div class="nav-logo">
+          <a href="#home" style="text-decoration: none; color: inherit">
+            <h2>gamal hal</h2>
+          </a>
+        </div>
+
+        <!-- قائمة التنقل الرئيسية -->
+        <ul class="nav-menu">
+          <li class="nav-item">
+            <a
+              href="#home"
+              class="nav-link active"
+              data-ar="الرئيسية"
+              data-en="Home"
+              >الرئيسية</a
+            >
+          </li>
+          <li class="nav-item">
+            <a href="#about" class="nav-link" data-ar="من أنا" data-en="About"
+              >من أنا</a
+            >
+          </li>
+          <li class="nav-item">
+            <a
+              href="#projects"
+              class="nav-link"
+              data-ar="مشاريعي"
+              data-en="Projects"
+              >مشاريعي</a
+            >
+          </li>
+          <li class="nav-item">
+            <a
+              href="#contact"
+              class="nav-link"
+              data-ar="تواصل معي"
+              data-en="Contact"
+              >تواصل معي</a
+            >
+          </li>
+        </ul>
+
+        <!-- أزرار التحكم (تبديل الوضع + قائمة الموبايل + اللغة) -->
+        <div class="nav-controls">
+          <!-- زر تبديل الوضع الداكن/الفاتح -->
+          <button
+            id="theme-toggle"
+            class="theme-toggle"
+            aria-label="تبديل الوضع الداكن"
+          >
+            <i class="fas fa-sun"></i>
+          </button>
+          <!-- زر اختيار اللغة -->
+          <button
+            id="lang-toggle"
+            class="lang-toggle"
+            aria-label="تبديل اللغة"
+            style="margin-right: 10px"
+          >
+            English
+          </button>
+          <!-- قائمة الموبايل (تظهر على الشاشات الصغيرة) -->
+          <div class="hamburger">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <!-- 
+        ========================================
+        القسم الرئيسي (Hero Section)
+        ========================================
+        أول ما يراه الزائر عند فتح الموقع
+        يحتوي على:
+        - عنوان ترحيبي
+        - وصف مختصر
+        - أزرار للتنقل
+        - صورة/أيقونة شخصية
+    -->
+    <section id="home" class="hero-section">
+      <!-- المحتوى النصي -->
+      <div class="hero-content">
+        <h1
+          class="hero-title"
+          data-ar="مرحباً، أنا جمال حال"
+          data-en="Hello, I'm Gamal Hal"
+        >
+          مرحباً، أنا جمال حال
+        </h1>
+        <p
+          class="hero-subtitle"
+          data-ar="مطور ويب متخصص في تطوير المواقع والتطبيقات"
+          data-en="Web developer specialized in building websites and applications"
+        >
+          مطور ويب متخصص في تطوير المواقع والتطبيقات
+        </p>
+
+        <!-- أزرار التنقل -->
+        <div class="hero-buttons">
+          <a
+            href="#projects"
+            class="btn btn-primary"
+            data-ar="مشاهدة أعمالي"
+            data-en="View My Work"
+            >مشاهدة أعمالي</a
+          >
+          <a
+            href="#contact"
+            class="btn btn-secondary"
+            data-ar="تواصل معي"
+            data-en="Contact Me"
+            >تواصل معي</a
+          >
+        </div>
+      </div>
+
+      <!-- الصورة الشخصية -->
+      <div class="hero-image">
+        <div class="profile-circle">
+          <img
+            src="profile.jpg"
+            alt="صورة جمال حال الشخصية"
+            style="
+              width: 100%;
+              height: 100%;
+              object-fit: cover;
+              border-radius: 50%;
+            "
+          />
+        </div>
+      </div>
+    </section>
+
+    <!-- 
+        ========================================
+        قسم "من أنا" (About Section)
+        ========================================
+        يعرض معلومات شخصية ومهارات المطور
+        يحتوي على:
+        - وصف شخصي
+        - قائمة المهارات التقنية
+    -->
+    <section id="about" class="about-section">
+      <div class="container">
+        <h2 class="section-title" data-ar="من أنا" data-en="About Me">
+          من أنا
+        </h2>
+        <div class="about-content">
+          <div class="about-text">
+            <!-- الوصف الشخصي -->
+            <p>
+              مطور ويب شغوف بإنشاء تجارب رقمية مميزة. لدي خبرة في تطوير المواقع
+              والتطبيقات باستخدام أحدث التقنيات.
+            </p>
+
+            <!-- English professional summary -->
+            <p
+              style="
+                margin-top: 1.5rem;
+                direction: ltr;
+                text-align: left;
+                font-size: 1.05rem;
+                color: var(--text-secondary);
+              "
+            >
+              With a robust background in computer science from the Cairo Higher
+              Institute and hands-on experience as a Technical Support Engineer
+              at WAVZ, we spearheaded critical support for the Citizens Card
+              Project, enhancing user experience through responsive design and
+              proficient use of Git, HTML, CSS, JS, React and more. Previously,
+              our three-month tenure at Telecom Egypt honed our technical
+              support skills, further establishing our competencies in web
+              development. Our educational foundation and professional journey
+              reflect a steadfast commitment to delivering technical excellence
+              and innovative solutions.
+            </p>
+
+            <!-- زر رؤية السيرة الذاتية في قسم من أنا -->
+            <div style="text-align: center; margin: 2rem 0">
+              <a
+                href="https://drive.google.com/drive/u/0/folders/1Y3QN-RFNhhKFc6P3zkjU-73RZDKEoqsj"
+                target="_blank"
+                rel="noopener"
+                class="btn btn-primary"
+                style="
+                  display: inline-block;
+                  font-size: 1.1rem;
+                  padding: 12px 36px;
+                  margin-top: 10px;
+                "
+              >
+                <i class="fas fa-file-alt" style="margin-left: 8px"></i> رؤية
+                السيرة الذاتية (CV)
+              </a>
+            </div>
+
+            <!-- قسم المهارات -->
+            <div class="skills">
+              <h3 data-ar="المهارات التقنية" data-en="Technical Skills">
+                المهارات التقنية
+              </h3>
+              <div class="skill-tags">
+                <div
+                  class="skill-tag"
+                  style="
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                  "
+                >
+                  React
+                  <i
+                    class="fab fa-react"
+                    style="font-size: 2rem; color: #61dafb; margin-top: 0.3rem"
+                  ></i>
+                </div>
+                <div
+                  class="skill-tag"
+                  style="
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                  "
+                >
+                  Git
+                  <i
+                    class="fab fa-git-alt"
+                    style="font-size: 2rem; color: #f34f29; margin-top: 0.3rem"
+                  ></i>
+                </div>
+                <div
+                  class="skill-tag"
+                  style="
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                  "
+                >
+                  Responsive Website
+                  <i
+                    class="fas fa-laptop-code"
+                    style="font-size: 2rem; color: #4caf50; margin-top: 0.3rem"
+                  ></i>
+                </div>
+                <div
+                  class="skill-tag"
+                  style="
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                  "
+                >
+                  jQuery
+                  <i
+                    class="fab fa-js"
+                    style="font-size: 2rem; color: #0769ad; margin-top: 0.3rem"
+                  ></i>
+                </div>
+                <div
+                  class="skill-tag"
+                  style="
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                  "
+                >
+                  Bootstrap
+                  <i
+                    class="fab fa-bootstrap"
+                    style="font-size: 2rem; color: #7952b3; margin-top: 0.3rem"
+                  ></i>
+                </div>
+                <div
+                  class="skill-tag"
+                  style="
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                  "
+                >
+                  JavaScript
+                  <i
+                    class="fab fa-js-square"
+                    style="font-size: 2rem; color: #f7df1e; margin-top: 0.3rem"
+                  ></i>
+                </div>
+                <div
+                  class="skill-tag"
+                  style="
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                  "
+                >
+                  CSS
+                  <i
+                    class="fab fa-css3-alt"
+                    style="font-size: 2rem; color: #1572b6; margin-top: 0.3rem"
+                  ></i>
+                </div>
+                <div
+                  class="skill-tag"
+                  style="
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                  "
+                >
+                  HTML
+                  <i
+                    class="fab fa-html5"
+                    style="font-size: 2rem; color: #e44d26; margin-top: 0.3rem"
+                  ></i>
+                </div>
+                <div
+                  class="skill-tag"
+                  style="
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                  "
+                >
+                  Programming Language (C++, Visual Basic, ...)
+                  <i
+                    class="fas fa-code"
+                    style="font-size: 2rem; color: #607d8b; margin-top: 0.3rem"
+                  ></i>
+                </div>
+              </div>
+              <h3 data-ar="المهارات الشخصية" data-en="Personal Skills">
+                المهارات الشخصية
+              </h3>
+              <div class="skill-tags">
+                <span class="skill-tag">Network troubleshooting</span>
+                <span class="skill-tag">Hardware troubleshooting</span>
+                <span class="skill-tag">Time management</span>
+                <span class="skill-tag">Leadership & Motivation</span>
+                <span class="skill-tag"
+                  >Ability to work independently or as part of a team</span
+                >
+                <span class="skill-tag">Highly organised and efficient</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 
+        ========================================
+        قسم المشاريع (Projects Section)
+        ========================================
+        يعرض أعمال المطور مع إمكانية التصفية
+        يحتوي على:
+        - أزرار تصفية (الكل، Native، Framework)
+        - بطاقات المشاريع
+        - روابط للمشاريع
+    -->
+    <section id="projects" class="projects-section">
+      <div class="container">
+        <h2 class="section-title" data-ar="مشاريعي" data-en="My Projects">
+          مشاريعي
+        </h2>
+
+        <!-- أزرار تصفية المشاريع -->
+        <div class="filter-buttons">
+          <button
+            class="filter-btn active"
+            data-filter="all"
+            data-ar="الكل"
+            data-en="All"
+          >
+            الكل
+          </button>
+          <button
+            class="filter-btn"
+            data-filter="native"
+            data-ar="Native"
+            data-en="Native"
+          >
+            Native
+          </button>
+          <button
+            class="filter-btn"
+            data-filter="framework"
+            data-ar="Framework"
+            data-en="Framework"
+          >
+            Framework
+          </button>
+        </div>
+
+        <!-- شبكة المشاريع -->
+        <div class="projects-grid">
+          <!-- MovieLand (my-react-app-moive-app) -->
+          <div class="project-card" data-category="framework">
+            <div class="project-image">
+              <img
+                src="movieland.PNG"
+                alt="MovieLand screenshot"
+                style="
+                  width: 100%;
+                  height: 140px;
+                  object-fit: cover;
+                  border-radius: 10px 10px 0 0;
+                "
+              />
+            </div>
+            <div class="project-info">
+              <h3>my-react-app-moive-app</h3>
+              <p>React movie app (CSS)</p>
+              <div class="project-links">
+                <a
+                  href="https://gamalhal.github.io/my-react-app-moive-app/"
+                  class="project-link"
+                  target="_blank"
+                  rel="noopener"
+                  ><i class="fas fa-external-link-alt"></i
+                ></a>
+                <a
+                  href="https://github.com/gamalhal/my-react-app-moive-app"
+                  class="project-link"
+                  target="_blank"
+                  rel="noopener"
+                  ><i class="fab fa-github"></i
+                ></a>
+              </div>
+            </div>
+          </div>
+          <!-- Portfolio -->
+          <div class="project-card" data-category="framework">
+            <div class="project-image">
+              <img
+                src="portfolio.PNG"
+                alt="Portfolio screenshot"
+                style="
+                  width: 100%;
+                  height: 140px;
+                  object-fit: cover;
+                  border-radius: 10px 10px 0 0;
+                "
+              />
+            </div>
+            <div class="project-info">
+              <h3>gamalhal-simple-portfolio</h3>
+              <p>Simple portfolio website (CSS)</p>
+              <div class="project-links">
+                <a
+                  href="https://gamalhal.github.io/gamalhal-simple-portfolio/"
+                  class="project-link"
+                  target="_blank"
+                  rel="noopener"
+                  ><i class="fas fa-external-link-alt"></i
+                ></a>
+                <a
+                  href="https://github.com/gamalhal/gamalhal-simple-portfolio"
+                  class="project-link"
+                  target="_blank"
+                  rel="noopener"
+                  ><i class="fab fa-github"></i
+                ></a>
+              </div>
+            </div>
+          </div>
+          <!-- Huddle -->
+          <div class="project-card" data-category="framework">
+            <div class="project-image">
+              <img
+                src="huddle.PNG"
+                alt="Huddle screenshot"
+                style="
+                  width: 100%;
+                  height: 140px;
+                  object-fit: cover;
+                  border-radius: 10px 10px 0 0;
+                "
+              />
+            </div>
+            <div class="project-info">
+              <h3>huddle-landing-page-with-single-introductory-section</h3>
+              <p>Huddle landing page (CSS)</p>
+              <div class="project-links">
+                <a
+                  href="https://gamalhal.github.io/huddle-landing-page-with-single-introductory-section/"
+                  class="project-link"
+                  target="_blank"
+                  rel="noopener"
+                  ><i class="fas fa-external-link-alt"></i
+                ></a>
+                <a
+                  href="https://github.com/gamalhal/huddle-landing-page-with-single-introductory-section"
+                  class="project-link"
+                  target="_blank"
+                  rel="noopener"
+                  ><i class="fab fa-github"></i
+                ></a>
+              </div>
+            </div>
+          </div>
+          <!-- CRUD -->
+          <div class="project-card" data-category="native">
+            <div class="project-image">
+              <img
+                src="crud.PNG"
+                alt="CRUD screenshot"
+                style="
+                  width: 100%;
+                  height: 140px;
+                  object-fit: cover;
+                  border-radius: 10px 10px 0 0;
+                "
+              />
+            </div>
+            <div class="project-info">
+              <h3>cruds</h3>
+              <p>Project about cruds (JavaScript)</p>
+              <div class="project-links">
+                <a
+                  href="https://gamalhal.github.io/cruds/"
+                  class="project-link"
+                  target="_blank"
+                  rel="noopener"
+                  ><i class="fas fa-external-link-alt"></i
+                ></a>
+                <a
+                  href="https://github.com/gamalhal/cruds"
+                  class="project-link"
+                  target="_blank"
+                  rel="noopener"
+                  ><i class="fab fa-github"></i
+                ></a>
+              </div>
+            </div>
+          </div>
+          <!-- Student List -->
+          <div class="project-card" data-category="native">
+            <div class="project-image">
+              <img
+                src="student-list.PNG"
+                alt="Student List screenshot"
+                style="
+                  width: 100%;
+                  height: 140px;
+                  object-fit: cover;
+                  border-radius: 10px 10px 0 0;
+                "
+              />
+            </div>
+            <div class="project-info">
+              <h3>student-list</h3>
+              <p>Student list app (TypeScript)</p>
+              <div class="project-links">
+                <a
+                  href="https://student-list-gamal.netlify.app/"
+                  class="project-link"
+                  target="_blank"
+                  rel="noopener"
+                  ><i class="fas fa-external-link-alt"></i
+                ></a>
+                <a
+                  href="https://github.com/gamalhal/student-list"
+                  class="project-link"
+                  target="_blank"
+                  rel="noopener"
+                  ><i class="fab fa-github"></i
+                ></a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 
+        ========================================
+        قسم التواصل (Contact Section)
+        ========================================
+        يعرض معلومات التواصل ونموذج إرسال رسائل
+        يحتوي على:
+        - معلومات التواصل (بريد، هاتف، موقع)
+        - نموذج إرسال رسائل
+    -->
+    <section id="contact" class="contact-section">
+      <div class="container">
+        <h2 class="section-title" data-ar="تواصل معي" data-en="Contact Me">
+          تواصل معي
+        </h2>
+        <div class="contact-content">
+          <!-- معلومات التواصل -->
+          <div class="contact-info">
+            <div class="contact-item">
+              <i class="fas fa-envelope"></i>
+              <a
+                href="mailto:gamalhal.chi@gmail.com"
+                style="color: inherit; text-decoration: none"
+              >
+                gamalhal.chi@gmail.com
+              </a>
+            </div>
+            <div class="contact-item">
+              <i class="fab fa-whatsapp"></i>
+              <a
+                href="https://wa.me/201274887580"
+                target="_blank"
+                rel="noopener"
+                style="color: inherit; text-decoration: none"
+              >
+                +20 127 488 7580
+              </a>
+            </div>
+            <div class="contact-item">
+              <i class="fas fa-map-marker-alt"></i>
+              <p>مصر</p>
+            </div>
+          </div>
+
+          <!-- نموذج إرسال رسائل -->
+          <form class="contact-form">
+            <input type="text" placeholder="الاسم" required />
+            <input type="email" placeholder="البريد الإلكتروني" required />
+            <textarea placeholder="الرسالة" rows="5" required></textarea>
+            <button
+              type="submit"
+              class="btn btn-primary"
+              data-ar="إرسال الرسالة"
+              data-en="Send Message"
+            >
+              إرسال الرسالة
+            </button>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <!-- Floating WhatsApp Support Button -->
+    <a
+      href="https://wa.me/201274887580"
+      target="_blank"
+      rel="noopener"
+      class="whatsapp-support-btn"
+      aria-label="تواصل عبر واتساب"
+    >
+      <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <!-- 
+        ========================================
+        التذييل (Footer)
+        ========================================
+        يعرض حقوق النشر وروابط التواصل الاجتماعي
+        يحتوي على:
+        - حقوق النشر
+        - روابط وسائل التواصل الاجتماعي
+    -->
+    <footer class="footer">
+      <div class="container">
+        <p
+          data-ar="جميع الحقوق محفوظة © Gamal Hal 2024"
+          data-en="All rights reserved © Gamal Hal 2024"
+        >
+          جميع الحقوق محفوظة © Gamal Hal 2024
+        </p>
+        <div class="social-links">
+          <a
+            href="https://www.facebook.com/gamal.hal"
+            target="_blank"
+            rel="noopener"
+            ><i class="fab fa-facebook-f"></i
+          ></a>
+          <a href="https://twitter.com/gamalhal" target="_blank" rel="noopener"
+            ><i class="fab fa-twitter"></i
+          ></a>
+          <a
+            href="https://www.linkedin.com/in/gamal-hal-b7720419a/"
+            target="_blank"
+            rel="noopener"
+            ><i class="fab fa-linkedin-in"></i
+          ></a>
+          <a href="#" target="_blank" rel="noopener"
+            ><i class="fab fa-youtube"></i
+          ></a>
+          <a href="https://github.com/gamalhal" target="_blank" rel="noopener"
+            ><i class="fab fa-github"></i
+          ></a>
+        </div>
+      </div>
+    </footer>
+
+    <!-- ربط ملف JavaScript -->
+    <script src="script.js"></script>
+  </body>
+</html>
