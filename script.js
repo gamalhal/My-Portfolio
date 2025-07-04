@@ -518,3 +518,21 @@ window.addEventListener("DOMContentLoaded", () => {
   const savedLang = localStorage.getItem("lang") || "ar";
   setLanguage(savedLang);
 });
+
+/*
+    ========================================
+    فتح المشروع عند الضغط على الكارت
+    ========================================
+    عند الضغط على كارت المشروع بالكامل، يتم فتح أول رابط live demo في نافذة جديدة
+*/
+document.querySelectorAll('.project-card').forEach(card => {
+  card.addEventListener('click', function(e) {
+    // تجاهل الضغط إذا كان على رابط أو زر داخل الكارت
+    if (e.target.closest('a, button')) return;
+    // الحصول على أول رابط live demo (project-link) داخل الكارت
+    const liveLink = card.querySelector('.project-links .project-link');
+    if (liveLink && liveLink.href) {
+      window.open(liveLink.href, '_blank');
+    }
+  });
+});
