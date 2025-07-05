@@ -193,41 +193,18 @@
 
       <!-- الصورة الشخصية -->
       <div class="hero-image">
-        <div class="profile-circle">
-          <img
-            src="avatar.jpg"
-            alt="صورة جمال حال الشخصية"
-            style="
-              width: 100%;
-              height: 100%;
-              object-fit: cover;
-              border-radius: 50%;
-              display: block;
-              max-width: 100%;
-            "
-            onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
-          />
-          <div
-            style="
-              display: none;
-              width: 100%;
-              height: 100%;
-              background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-              border-radius: 50%;
-              align-items: center;
-              justify-content: center;
-              font-size: 4rem;
-              color: white;
-              font-weight: bold;
-              text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-              position: absolute;
-              top: 0;
-              left: 0;
-            "
-          >
-            GH
-          </div>
-        </div>
+        <img
+          src="pic.jpeg"
+          alt="صورة جمال حال الشخصية"
+          style="
+            width: 300px;
+            height: 400px;
+            object-fit: cover;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            border: 3px solid var(--accent-color);
+          "
+        />
       </div>
     </section>
 
@@ -492,6 +469,34 @@
 
         <!-- شبكة المشاريع -->
         <div class="projects-grid">
+          <!-- بطاقة الصورة الشخصية -->
+          <div class="project-card profile-card" data-category="all">
+            <div class="project-image">
+              <img
+                src="pic.jpeg"
+                alt="صورة جمال حال الشخصية"
+                style="
+                  width: 100%;
+                  height: 140px;
+                  object-fit: cover;
+                  border-radius: 10px 10px 0 0;
+                "
+              />
+            </div>
+            <div class="project-info">
+              <h3>جمال حال</h3>
+              <p>مطور ويب شغوف بإنشاء تجارب رقمية مميزة</p>
+              <div class="project-links">
+                <a href="#about" class="project-link"
+                  ><i class="fas fa-user"></i
+                ></a>
+                <a href="#contact" class="project-link"
+                  ><i class="fas fa-envelope"></i
+                ></a>
+              </div>
+            </div>
+          </div>
+
           <!-- MovieLand (my-react-app-moive-app) -->
           <div class="project-card" data-category="framework">
             <div class="project-image">
