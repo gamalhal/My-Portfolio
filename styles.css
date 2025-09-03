@@ -349,6 +349,7 @@ body {
 .hero-image img {
     animation: float 3s ease-in-out infinite; /* حركة عائمة */
     transition: transform 0.3s ease, box-shadow 0.3s ease;
+    
 }
 
 .hero-image img:hover {
