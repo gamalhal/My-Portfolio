@@ -412,7 +412,7 @@ scrollToTopBtn.addEventListener("click", () => {
   });
 });
 
-/* 
+/*
     ========================================
     تأثير التحميل للصور
     ========================================
@@ -420,12 +420,15 @@ scrollToTopBtn.addEventListener("click", () => {
 */
 const images = document.querySelectorAll("img");
 images.forEach((img) => {
-  img.addEventListener("load", function () {
-    this.style.opacity = "1"; // إظهار الصورة
-  });
+  // استثناء صورة القسم الرئيسي من تأثير التحميل
+  if (!img.closest('.hero-image')) {
+    img.addEventListener("load", function () {
+      this.style.opacity = "1"; // إظهار الصورة
+    });
 
-  img.style.opacity = "0"; // إخفاء الصورة
-  img.style.transition = "opacity 0.3s ease"; // انتقال سلس
+    img.style.opacity = "0"; // إخفاء الصورة
+    img.style.transition = "opacity 0.3s ease"; // انتقال سلس
+  }
 });
 
 /* 
