@@ -91,7 +91,7 @@ document.querySelectorAll(".nav-link").forEach((n) =>
   n.addEventListener("click", () => {
     hamburger.classList.remove("active"); // إزالة حالة النشاط من الزر
     navMenu.classList.remove("active"); // إخفاء القائمة
-  })
+  }),
 );
 
 /* 
@@ -234,19 +234,58 @@ if (contactForm) {
       return;
     }
 
-    // محاكاة إرسال النموذج
+    // تحضير واجهة زر الإرسال
     const submitButton = this.querySelector('button[type="submit"]');
     const originalText = submitButton.textContent; // النص الأصلي
     submitButton.textContent = "جاري الإرسال..."; // نص التحميل
     submitButton.disabled = true; // تعطيل الزر
 
-    // محاكاة تأخير الإرسال
-    setTimeout(() => {
-      alert("تم إرسال رسالتك بنجاح! سنتواصل معك قريباً.");
-      this.reset(); // إعادة تعيين النموذج
-      submitButton.textContent = originalText; // إعادة النص الأصلي
-      submitButton.disabled = false; // إعادة تفعيل الزر
-    }, 2000);
+    // قراءة إعدادات EmailJS من خصائص النموذج (ضع القيم الحقيقية في index.html)
+    const formEl = this;
+    const serviceID = formEl.dataset.emailjsService || "YOUR_SERVICE_ID";
+    const templateID = formEl.dataset.emailjsTemplate || "YOUR_TEMPLATE_ID";
+    const publicKey = formEl.dataset.emailjsUser || "YOUR_PUBLIC_KEY";
+
+    // إذا كانت مكتبة EmailJS متاحة ومُعدّة، استخدمها لإرسال الرسالة فعلياً
+    if (window.emailjs && publicKey !== "YOUR_PUBLIC_KEY") {
+      try {
+        emailjs.init(publicKey);
+      } catch (e) {
+        // قد تكون مُهيّأة مسبقاً - نتجاهل الخطأ
+      }
+
+      const templateParams = {
+        from_name: name,
+        from_email: email,
+        message: message,
+      };
+
+      emailjs.send(serviceID, templateID, templateParams).then(
+        () => {
+          alert("تم إرسال رسالتك بنجاح! سنتواصل معك قريباً.");
+          formEl.reset();
+          submitButton.textContent = originalText;
+          submitButton.disabled = false;
+        },
+        (err) => {
+          console.error("EmailJS error:", err);
+          alert("حدث خطأ أثناء إرسال الرسالة. الرجاء المحاولة لاحقاً.");
+          submitButton.textContent = originalText;
+          submitButton.disabled = false;
+        },
+      );
+    } else {
+      // إذا لم تُعدّ EmailJS بعد، نرجع للمحاكاة القديمة مع تحذير للمطور
+      console.warn(
+        "EmailJS not configured. Add your keys to the form data attributes in index.html.",
+      );
+      setTimeout(() => {
+        alert("تم إرسال رسالتك بنجاح! (محاكاة)");
+        formEl.reset();
+        submitButton.textContent = originalText;
+        submitButton.disabled = false;
+      }, 2000);
+    }
   });
 }
 
@@ -357,10 +396,13 @@ skillTags.forEach((tag, index) => {
   tag.style.transition = "opacity 0.5s ease, transform 0.5s ease"; // انتقال سلس
 
   // إظهار المهارة بتأخير متدرج
-  setTimeout(() => {
-    tag.style.opacity = "1"; // إظهار المهارة
-    tag.style.transform = "translateY(0)"; // إعادة موضعها
-  }, 1000 + index * 100); // تأخير متدرج
+  setTimeout(
+    () => {
+      tag.style.opacity = "1"; // إظهار المهارة
+      tag.style.transform = "translateY(0)"; // إعادة موضعها
+    },
+    1000 + index * 100,
+  ); // تأخير متدرج
 });
 
 /* 
@@ -421,7 +463,7 @@ scrollToTopBtn.addEventListener("click", () => {
 const images = document.querySelectorAll("img");
 images.forEach((img) => {
   // استثناء صورة القسم الرئيسي من تأثير التحميل
-  if (!img.closest('.hero-image')) {
+  if (!img.closest(".hero-image")) {
     img.addEventListener("load", function () {
       this.style.opacity = "1"; // إظهار الصورة
     });
@@ -528,14 +570,14 @@ window.addEventListener("DOMContentLoaded", () => {
     ========================================
     عند الضغط على كارت المشروع بالكامل، يتم فتح أول رابط live demo في نافذة جديدة
 */
-document.querySelectorAll('.project-card').forEach(card => {
-  card.addEventListener('click', function(e) {
+document.querySelectorAll(".project-card").forEach((card) => {
+  card.addEventListener("click", function (e) {
     // تجاهل الضغط إذا كان على رابط أو زر داخل الكارت
-    if (e.target.closest('a, button')) return;
+    if (e.target.closest("a, button")) return;
     // الحصول على أول رابط live demo (project-link) داخل الكارت
-    const liveLink = card.querySelector('.project-links .project-link');
+    const liveLink = card.querySelector(".project-links .project-link");
     if (liveLink && liveLink.href) {
-      window.open(liveLink.href, '_blank');
+      window.open(liveLink.href, "_blank");
     }
   });
 });

@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ar" dir="rtl" data-theme="dark">
   <!-- 
     ========================================
@@ -241,14 +241,20 @@
                 color: var(--text-secondary);
               "
             >
-              Innovative Software Developer with a proven track record of designing and developing robust web applications.
-Seeking a challenging role with a reputable organization to utilize my extensive technical skills and knowledge
-in computer science. Continuously staying up-to-date with the latest industry trends and advancements to
-provide top-notch solutions to clients. Adept at creating responsive websites from scratch, maintaining front-
-end for web and mobile applications, and implementing complex front-end applications using dynamic React.
-Demonstrated expertise in supporting and developing new functionality for existing projects. Proficient in
-writing unit tests to improve code predictability and documentation. Ready to join a progressive company that
-fosters professional growth and provides opportunities to showcase my abilities.
+              Innovative Software Developer with a proven track record of
+              designing and developing robust web applications. Seeking a
+              challenging role with a reputable organization to utilize my
+              extensive technical skills and knowledge in computer science.
+              Continuously staying up-to-date with the latest industry trends
+              and advancements to provide top-notch solutions to clients. Adept
+              at creating responsive websites from scratch, maintaining front-
+              end for web and mobile applications, and implementing complex
+              front-end applications using dynamic React. Demonstrated expertise
+              in supporting and developing new functionality for existing
+              projects. Proficient in writing unit tests to improve code
+              predictability and documentation. Ready to join a progressive
+              company that fosters professional growth and provides
+              opportunities to showcase my abilities.
             </p>
 
             <!-- زر رؤية السيرة الذاتية في قسم من أنا -->
@@ -880,7 +886,14 @@ fosters professional growth and provides opportunities to showcase my abilities.
           </div>
 
           <!-- نموذج إرسال رسائل -->
-          <form class="contact-form">
+          <!-- أضف هنا قيم EmailJS: data-emailjs-service, data-emailjs-template, data-emailjs-user -->
+          <form
+            class="contact-form"
+            id="contact-form"
+            data-emailjs-service="service_us6nrwo"
+            data-emailjs-template="YOUR_TEMPLATE_ID"
+            data-emailjs-user="1_9KUb6Bsr5KRfWd_"
+          >
             <input type="text" placeholder="الاسم" required />
             <input type="email" placeholder="البريد الإلكتروني" required />
             <textarea placeholder="الرسالة" rows="5" required></textarea>
@@ -952,6 +965,8 @@ fosters professional growth and provides opportunities to showcase my abilities.
     </footer>
 
     <!-- ربط ملف JavaScript -->
+    <!-- EmailJS SDK (client-side) - استبدل القيم في نموذج الاتصال بالـ IDs الفعلية -->
+    <script src="https://cdn.emailjs.com/sdk/3.2.0/email.min.js"></script>
     <script src="script.js"></script>
   </body>
 </html>
