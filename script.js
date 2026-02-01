@@ -22,6 +22,21 @@
 
 /* 
     ========================================
+    تهيئة EmailJS
+    ========================================
+    التحقق من تحميل SDK وتهيئتها
+*/
+// الانتظار قليلاً للتأكد من تحميل SDK
+setTimeout(() => {
+  if (window.emailjs) {
+    console.log("✅ EmailJS SDK loaded successfully");
+  } else {
+    console.warn("⚠️ EmailJS SDK not loaded. Check CDN link.");
+  }
+}, 100);
+
+/* 
+    ========================================
     تبديل الوضع الداكن/الفاتح
     ========================================
     يسمح للمستخدم بالتبديل بين الوضعين وحفظ تفضيله
@@ -249,9 +264,14 @@ if (contactForm) {
     // إذا كانت مكتبة EmailJS متاحة ومُعدّة، استخدمها لإرسال الرسالة فعلياً
     if (window.emailjs && publicKey !== "YOUR_PUBLIC_KEY") {
       try {
+        // تهيئة EmailJS (قد تكون مُهيّأة مسبقاً فنتجاهل الخطأ)
         emailjs.init(publicKey);
+        console.log("✅ EmailJS initialized with public key");
       } catch (e) {
-        // قد تكون مُهيّأة مسبقاً - نتجاهل الخطأ
+        console.log(
+          "ℹ️ EmailJS already initialized or init error (safe to ignore):",
+          e.message,
+        );
       }
 
       const templateParams = {
@@ -260,27 +280,41 @@ if (contactForm) {
         message: message,
       };
 
+      console.log("📤 Attempting to send email...");
+      console.log("Service ID:", serviceID);
+      console.log("Template ID:", templateID);
+      console.log("Params:", templateParams);
+
       emailjs.send(serviceID, templateID, templateParams).then(
         () => {
+          console.log("✅ Email sent successfully!");
           alert("تم إرسال رسالتك بنجاح! سنتواصل معك قريباً.");
           formEl.reset();
           submitButton.textContent = originalText;
           submitButton.disabled = false;
         },
         (err) => {
-          console.error("EmailJS error:", err);
-          alert("حدث خطأ أثناء إرسال الرسالة. الرجاء المحاولة لاحقاً.");
+          console.error("❌ EmailJS error:", err);
+          console.error("Error status:", err.status);
+          console.error("Error text:", err.text);
+          const errorMsg =
+            err.text || err.message || "تحقق من أسماء المتغيرات في القالب";
+          alert("❌ خطأ في الإرسال:\n" + errorMsg);
           submitButton.textContent = originalText;
           submitButton.disabled = false;
         },
       );
     } else {
       // إذا لم تُعدّ EmailJS بعد، نرجع للمحاكاة القديمة مع تحذير للمطور
-      console.warn(
-        "EmailJS not configured. Add your keys to the form data attributes in index.html.",
-      );
+      console.warn("⚠️ EmailJS not configured:");
+      console.warn("- window.emailjs exists?", !!window.emailjs);
+      console.warn("- publicKey configured?", publicKey !== "YOUR_PUBLIC_KEY");
+      console.warn("- serviceID:", serviceID);
+      console.warn("- templateID:", templateID);
+      console.warn("- publicKey:", publicKey);
+
       setTimeout(() => {
-        alert("تم إرسال رسالتك بنجاح! (محاكاة)");
+        alert("تم إرسال رسالتك بنجاح! (محاكاة - لم تُعدّ EmailJS)");
         formEl.reset();
         submitButton.textContent = originalText;
         submitButton.disabled = false;
