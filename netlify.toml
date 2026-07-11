@@ -1,2 +1,0 @@
-[[context.production.plugins]]
-  package = "netlify-purge-cloudflare-on-deploy"
