@@ -1,7 +1,7 @@
 # موقع جمال حال الشخصي - Gamal Hal Portfolio
 
                                                                                           live demo :
-                                                                                          https://gamal-my-portfolio.netlify.app/     OR            https://myportfolio-gamalhal.gamalhal-chi.workers.dev/
+                                                                                                   https://myportfolio-gamalhal.gamalhal-chi.workers.dev/
 
 
 موقع شخصي احترافي مبني بـ HTML و CSS و JavaScript مع دعم كامل للغة العربية والوضعين الداكن والفاتح.
